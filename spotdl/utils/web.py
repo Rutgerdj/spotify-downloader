@@ -418,7 +418,7 @@ async def download_url(
                 status_code=500, detail=f"Error downloading: {song.name}"
             )
 
-        beets.ui.main(["import", "-A", path])
+        beets.ui.main(["import", "-A", str(path)])
 
         return str(path.absolute())
 
