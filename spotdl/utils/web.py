@@ -27,6 +27,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.types import Scope
 from uvicorn import Server
+import beets.ui
 
 from spotdl._version import __version__
 from spotdl.download.downloader import Downloader
@@ -416,6 +417,8 @@ async def download_url(
             raise HTTPException(
                 status_code=500, detail=f"Error downloading: {song.name}"
             )
+
+        beets.ui.main(["import", "-A", path])
 
         return str(path.absolute())
 
